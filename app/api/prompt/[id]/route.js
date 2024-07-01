@@ -43,7 +43,7 @@ export const PATCH = async(req, {params}) => {
         existingPrompt.prompt = prompt;
         existingPrompt.tag = tag;
 
-        existingPrompt.save()
+        await existingPrompt.save()
         
         return new Response(JSON.stringify(existingPrompt),{
             status : 200
