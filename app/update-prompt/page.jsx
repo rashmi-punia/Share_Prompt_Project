@@ -22,15 +22,18 @@ const EditPrompt = () => {
   console.log(post);
 
   useEffect(() => {
-    const getPromptdetils = async () => {
-      const { data } = await axios.get(`/api/prompt/${promptId}`);
-
-      setPost({
-        prompt: data.prompt,
-        tag: data.tag,
-      });
+    const getPromptDetails = async () => {
+      try {
+        const { data } = await axios.get(`/api/prompt/${promptId}`);
+        setPost({
+          prompt: data.prompt,
+          tag: data.tag,
+        });
+      } catch (error) {
+        console.error("Failed to fetch prompt details:", error);
+      }
     };
-    if (promptId) getPromptdetils();
+    if (promptId) getPromptDetails();
   }, [promptId]);
 
   const updatePrompt = async(e) => {
